@@ -16,12 +16,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/public/hello")
+    @GetMapping("/private/hello")
     public String hello() {
-        return "Bienvenue aux joueurs";
+        return "Bienvenue sur votre espace personnel privé !";
     }
 
-    @PostMapping("/public/auth/register")
+    @PostMapping("/public/users/register")
     public ResponseEntity<?> register(@RequestBody UserRegisterDTO registerDTO) {
         try {
             UserResponseDTO response = userService.register(registerDTO);

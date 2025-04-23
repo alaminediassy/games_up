@@ -1,13 +1,8 @@
 package com.gamesUP.gamesUP.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -15,15 +10,9 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class JwtService {
@@ -37,17 +26,17 @@ public class JwtService {
     @Value("${jwt.expiration-in-days}")
     private int expirationInDays;
 
-    @Value("${jwt.secret-key}")
-    private String secretKey;
-
     public JwtService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
     }
 
+    /**
+     * Génère un token JWT pour un utilisateur authentifié.
+     * Le token inclut les rôles (scope) avec le préfixe SCOPE_ pour Spring Security.
+     */
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
 
-        // Scope contient les rôles avec SCOPE_ comme préfixe
         String scope = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .map(authority -> {
@@ -70,19 +59,5 @@ public class JwtService {
                 JwsHeader.with(MacAlgorithm.HS256).build(), claims
         )).getTokenValue();
     }
-
-    private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-    }
-
-    public long getExpirationTime(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        Date expirationDate = claims.getExpiration();
-        return (expirationDate.getTime() - System.currentTimeMillis()) / 1000;
-    }
 }
+
