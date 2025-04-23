@@ -1,7 +1,7 @@
 package com.gamesUP.gamesUP.controller;
 
-import com.gamesUP.gamesUP.dto.UserRegisterDTO;
-import com.gamesUP.gamesUP.dto.UserResponseDTO;
+import com.gamesUP.gamesUP.dto.request.UserRegisterDTO;
+import com.gamesUP.gamesUP.dto.response.UserResponseDTO;
 import com.gamesUP.gamesUP.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

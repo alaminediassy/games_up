@@ -1,7 +1,7 @@
 package com.gamesUP.gamesUP.controller;
 
-import com.gamesUP.gamesUP.dto.LoginRequest;
-import com.gamesUP.gamesUP.dto.LoginResponse;
+import com.gamesUP.gamesUP.dto.request.LoginRequest;
+import com.gamesUP.gamesUP.dto.response.LoginResponse;
 import com.gamesUP.gamesUP.exception.BadCredentialsException;
 import com.gamesUP.gamesUP.security.JwtService;
 import org.springframework.security.core.AuthenticationException;

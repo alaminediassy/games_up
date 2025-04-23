@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.dto;
+package com.gamesUP.gamesUP.dto.request;
 
 public record LoginRequest(
         String email,

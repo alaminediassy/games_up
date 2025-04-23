@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.dto;
+package com.gamesUP.gamesUP.dto.response;
 
 public record UserResponseDTO(
         String nom,

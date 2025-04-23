@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.dto;
+package com.gamesUP.gamesUP.dto.request;
 
 /**
  * DTO représentant les données envoyées par le client lors de l’inscription.

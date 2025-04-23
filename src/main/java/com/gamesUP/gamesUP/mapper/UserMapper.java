@@ -1,6 +1,6 @@
 package com.gamesUP.gamesUP.mapper;
 
-import com.gamesUP.gamesUP.dto.UserRegisterDTO;
+import com.gamesUP.gamesUP.dto.request.UserRegisterDTO;
 import com.gamesUP.gamesUP.model.Role;
 import com.gamesUP.gamesUP.model.User;
 import org.springframework.stereotype.Component;

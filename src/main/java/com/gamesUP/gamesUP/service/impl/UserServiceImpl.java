@@ -1,7 +1,7 @@
 package com.gamesUP.gamesUP.service.impl;
 
-import com.gamesUP.gamesUP.dto.UserRegisterDTO;
-import com.gamesUP.gamesUP.dto.UserResponseDTO;
+import com.gamesUP.gamesUP.dto.request.UserRegisterDTO;
+import com.gamesUP.gamesUP.dto.response.UserResponseDTO;
 import com.gamesUP.gamesUP.exception.EmailAlreadyUsedException;
 import com.gamesUP.gamesUP.mapper.UserMapper;
 import com.gamesUP.gamesUP.model.User;
