@@ -2,6 +2,7 @@ package com.gamesUP.gamesUP.service.impl;
 
 import com.gamesUP.gamesUP.dto.UserRegisterDTO;
 import com.gamesUP.gamesUP.dto.UserResponseDTO;
+import com.gamesUP.gamesUP.exception.EmailAlreadyUsedException;
 import com.gamesUP.gamesUP.mapper.UserMapper;
 import com.gamesUP.gamesUP.model.User;
 import com.gamesUP.gamesUP.repository.UserRepository;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO register(UserRegisterDTO dto) {
         if (userRepository.findByEmail(dto.email()).isPresent()) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new EmailAlreadyUsedException();
         }
 
         User user = userMapper.toEntity(dto);

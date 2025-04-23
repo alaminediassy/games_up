@@ -2,8 +2,9 @@ package com.gamesUP.gamesUP.controller;
 
 import com.gamesUP.gamesUP.dto.LoginRequest;
 import com.gamesUP.gamesUP.dto.LoginResponse;
+import com.gamesUP.gamesUP.exception.BadCredentialsException;
 import com.gamesUP.gamesUP.security.JwtService;
-import com.gamesUP.gamesUP.service.UserService;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,14 +29,18 @@ public class AuthController {
 
     @PostMapping("/public/auth/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.email(),
-                        loginRequest.password()
-                )
-        );
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.email(),
+                            loginRequest.password()
+                    )
+            );
 
-        String jwtToken = jwtService.generateToken(authentication);
-        return ResponseEntity.ok(new LoginResponse(jwtToken));
+            String jwtToken = jwtService.generateToken(authentication);
+            return ResponseEntity.ok(new LoginResponse(jwtToken));
+        } catch (AuthenticationException e) {
+            throw new BadCredentialsException();
+        }
     }
 }
