@@ -12,4 +12,5 @@ public interface GameService {
     GameDTO updateGame(Long id, GameCreateDTO dto);
     void deleteGame(Long id);
     List<GameDTO> searchGamesByName(String name);
+    List<GameDTO> filterGames(String name, Long categoryId, Long authorId, Long publisherId);
 }

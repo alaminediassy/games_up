@@ -80,4 +80,17 @@ public class GameController {
     }
 
 
+    /**
+     * Recherche de jeux par filtres : catégorie, auteur, éditeur (optionnels).
+     */
+    @GetMapping("/public/games/filter")
+    public ResponseEntity<List<GameDTO>> filterGames(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long category,
+            @RequestParam(required = false) Long author,
+            @RequestParam(required = false) Long publisher
+    ) {
+        List<GameDTO> filtered = gameService.filterGames(name, category, author, publisher);
+        return ResponseEntity.ok(filtered);
+    }
 }

@@ -85,6 +85,14 @@ public class GameServiceImpl implements GameService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<GameDTO> filterGames(String name, Long categoryId, Long authorId, Long publisherId) {
+        return gameRepository.searchByFilters(name, categoryId, authorId, publisherId)
+                .stream()
+                .map(gameMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     private GameDTO getGameDTO(GameCreateDTO dto, Game game) {
         game.setCategory(categoryRepository.findById(dto.categoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Catégorie", dto.categoryId())));
