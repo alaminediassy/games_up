@@ -5,5 +5,5 @@ package com.gamesUP.gamesUP.dto.request;
  */
 public record PurchaseLineCreateDTO(
         Long gameId,
-        int quantity
+        double rating
 ) {}

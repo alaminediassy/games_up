@@ -53,8 +53,8 @@ public class PurchaseServiceImpl implements PurchaseService {
                             .orElseThrow(() -> new ResourceNotFoundException("Jeu", lineDTO.gameId()));
 
                     return new PurchaseLine(
-                            null,
-                            lineDTO.quantity(),
+                            (Long) null,
+                            (int) lineDTO.rating(),
                             game.getPrice(),
                             game,
                             purchase
