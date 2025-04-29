@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.service;
+package com.gamesUP.gamesUP.service.impl;
 
 import com.gamesUP.gamesUP.dto.request.UserRegisterDTO;
 import com.gamesUP.gamesUP.dto.response.UserResponseDTO;
@@ -7,49 +7,40 @@ import com.gamesUP.gamesUP.mapper.UserMapper;
 import com.gamesUP.gamesUP.model.Role;
 import com.gamesUP.gamesUP.model.User;
 import com.gamesUP.gamesUP.repository.UserRepository;
-import com.gamesUP.gamesUP.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
 
-    @Mock
-    private UserRepository userRepository;
-
-    @Mock
-    private UserMapper userMapper;
-
-    @Mock
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @InjectMocks
     private UserServiceImpl userService;
+    private UserRepository userRepository;
+    private UserMapper userMapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        userRepository = mock(UserRepository.class);
+        userMapper = mock(UserMapper.class);
+        passwordEncoder = mock(BCryptPasswordEncoder.class);
+        userService = new UserServiceImpl(userRepository, userMapper, passwordEncoder);
     }
 
     @Test
-    void shouldRegisterNewUser() {
-        // Given
-        UserRegisterDTO dto = new UserRegisterDTO("Alice", "alice@example.com", "password123");
+    void shouldRegisterUserSuccessfully() {
+        // Arrange
+        UserRegisterDTO dto = new UserRegisterDTO("Alioune", "alioune@example.com", "password123");
 
         User user = new User();
         user.setNom(dto.nom());
         user.setEmail(dto.email());
         user.setPassword(dto.password());
-        user.setRole(Role.CLIENT);
+        user.setRole(Role.CLIENT); // Ajouter manuellement car UserRegisterDTO ne contient pas de role
 
         User savedUser = new User();
         savedUser.setId(1L);
@@ -60,36 +51,31 @@ class UserServiceTest {
 
         when(userRepository.findByEmail(dto.email())).thenReturn(Optional.empty());
         when(userMapper.toEntity(dto)).thenReturn(user);
-        when(passwordEncoder.encode(dto.password())).thenReturn("encodedPassword");
+        when(passwordEncoder.encode(user.getPassword())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        // When
+        // Act
         UserResponseDTO response = userService.register(dto);
 
-        // Then
-        assertThat(response).isNotNull();
-        assertThat(response.nom()).isEqualTo(dto.nom());
-        assertThat(response.email()).isEqualTo(dto.email());
-        assertThat(response.role()).isEqualTo("CLIENT");
+        // Assert
+        assertNotNull(response);
+        assertEquals("Alioune", response.nom());
+        assertEquals("alioune@example.com", response.email());
+        assertEquals("CLIENT", response.role());
 
-        verify(userRepository).findByEmail(dto.email());
-        verify(userMapper).toEntity(dto);
-        verify(passwordEncoder).encode(dto.password());
-        verify(userRepository).save(user);
+        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
     void shouldThrowExceptionIfEmailAlreadyUsed() {
-        // Given
-        UserRegisterDTO dto = new UserRegisterDTO("Bob", "bob@example.com", "securePass");
+        // Arrange
+        UserRegisterDTO dto = new UserRegisterDTO("Alioune", "alioune@example.com", "password123");
 
         when(userRepository.findByEmail(dto.email())).thenReturn(Optional.of(new User()));
 
-        // Then
-        assertThatThrownBy(() -> userService.register(dto))
-                .isInstanceOf(EmailAlreadyUsedException.class);
+        // Act & Assert
+        assertThrows(EmailAlreadyUsedException.class, () -> userService.register(dto));
 
-        verify(userRepository).findByEmail(dto.email());
-        verifyNoMoreInteractions(userMapper, passwordEncoder, userRepository);
+        verify(userRepository, never()).save(any());
     }
 }

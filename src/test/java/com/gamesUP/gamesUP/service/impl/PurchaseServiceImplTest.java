@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.service;
+package com.gamesUP.gamesUP.service.impl;
 
 import com.gamesUP.gamesUP.dto.request.PurchaseCreateDTO;
 import com.gamesUP.gamesUP.dto.request.PurchaseLineCreateDTO;
@@ -11,7 +11,6 @@ import com.gamesUP.gamesUP.model.User;
 import com.gamesUP.gamesUP.repository.GameRepository;
 import com.gamesUP.gamesUP.repository.PurchaseRepository;
 import com.gamesUP.gamesUP.repository.UserRepository;
-import com.gamesUP.gamesUP.service.impl.PurchaseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

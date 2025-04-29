@@ -1,6 +1,7 @@
 package com.gamesUP.gamesUP.exception;
 
 public class AlreadyExistsException extends RuntimeException {
+
     public AlreadyExistsException(String resource) {
         super(resource + " existe déjà.");
     }

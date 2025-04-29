@@ -19,7 +19,6 @@ public class GameMapper {
                 game.getName(),
                 game.getDescription(),
                 game.getPrice(),
-                game.getStock(),
                 game.getCategory() != null ? game.getCategory().getLabel() : null,
                 game.getAuthor() != null ? game.getAuthor().getName() : null,
                 game.getPublisher() != null ? game.getPublisher().getName() : null

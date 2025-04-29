@@ -1,4 +1,4 @@
-package com.gamesUP.gamesUP.service;
+package com.gamesUP.gamesUP.service.impl;
 
 import com.gamesUP.gamesUP.dto.request.AuthorDTO;
 import com.gamesUP.gamesUP.dto.request.CategoryDTO;
@@ -10,7 +10,6 @@ import com.gamesUP.gamesUP.model.Publisher;
 import com.gamesUP.gamesUP.repository.AuthorRepository;
 import com.gamesUP.gamesUP.repository.CategoryRepository;
 import com.gamesUP.gamesUP.repository.PublisherRepository;
-import com.gamesUP.gamesUP.service.impl.GameMetaServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
