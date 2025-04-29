@@ -19,10 +19,16 @@ public class RecommendationService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Envoie les données d’achat d’un utilisateur à une API externe pour obtenir des recommandations.
+     *
+     * @param userId    identifiant de l’utilisateur
+     * @param purchases liste des lignes d’achat à envoyer
+     * @return la réponse retournée par l’API FastAPI
+     */
     public Object getRecommendations(Long userId, List<PurchaseLineCreateDTO> purchases) {
         String url = "http://localhost:8000/recommendations/";
 
-        // Correction ici : Construire manuellement le body pour correspondre à ce que FastAPI attend
         List<Map<String, Object>> formattedPurchases = purchases.stream()
                 .map(p -> {
                     Map<String, Object> map = new HashMap<>();

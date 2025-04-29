@@ -23,6 +23,18 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Inscription d'un nouvel utilisateur.
+     * Étapes :
+     * 1. Vérification si l'email est déjà utilisé → lève une exception si c'est le cas.
+     * 2. Convertion du DTO d'inscription en entité User.
+     * 3. Encodage du mot de passe avec BCrypt.
+     * 4. Enregistrement de l'utilisateur dans la base de données.
+     * 5. Retourne un DTO de réponse contenant les infos publiques de l'utilisateur.
+     *
+     * @param dto données d'inscription fournies par l'utilisateur
+     * @return UserResponseDTO contenant le nom, l'email et le rôle de l'utilisateur créé
+     */
     @Override
     public UserResponseDTO register(UserRegisterDTO dto) {
         if (userRepository.findByEmail(dto.email()).isPresent()) {

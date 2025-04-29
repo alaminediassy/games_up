@@ -22,6 +22,13 @@ public class AdminInitializer implements CommandLineRunner {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    /**
+     * Méthode appelée automatiquement au démarrage de l’application.
+     * Elle vérifie si un utilisateur admin existe déjà, et sinon, elle en crée un.
+     *
+     * @param args les arguments de la ligne de commande (non utilisés ici)
+     * @throws Exception en cas d’erreur
+     */
     @Override
     public void run(String... args) throws Exception {
         String adminEmail = "admin@gamesup.com";

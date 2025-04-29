@@ -22,6 +22,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         this.tokenBlacklistService = tokenBlacklistService;
     }
 
+    /**
+     * Méthode appelée à chaque requête pour vérifier le token JWT.
+     *
+     * @param request      la requête HTTP
+     * @param response     la réponse HTTP
+     * @param filterChain  la chaîne des filtres à exécuter
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

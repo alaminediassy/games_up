@@ -26,7 +26,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
     private final PurchaseMapper purchaseMapper;
 
-    public PurchaseServiceImpl(UserRepository userRepository, GameRepository gameRepository, PurchaseRepository purchaseRepository, PurchaseMapper purchaseMapper) {
+    // Constructeur pour injecter les dépendances nécessaires au service
+    public PurchaseServiceImpl(UserRepository userRepository,
+                               GameRepository gameRepository,
+                               PurchaseRepository purchaseRepository,
+                               PurchaseMapper purchaseMapper) {
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.purchaseRepository = purchaseRepository;
@@ -34,6 +38,17 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
 
+    /**
+     * Crée un nouvel achat pour un utilisateur donné.
+     * - Vérifie que l'utilisateur existe.
+     * - Crée une nouvelle entité Purchase.
+     * - Crée les lignes d'achat en récupérant les jeux associés.
+     * - Sauvegarde l'achat et retourne le résultat sous forme de DTO.
+     *
+     * @param userEmail email de l’utilisateur qui effectue l’achat
+     * @param dto données d’entrée
+     * @return un DTO représentant l’achat enregistré
+     */
     @Override
     @Transactional
     public PurchaseDTO createPurchase(String userEmail, PurchaseCreateDTO dto) {
@@ -67,6 +82,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseMapper.toDTO(saved);
     }
 
+    /**
+     * Récupère tous les achats d’un utilisateur.
+     *
+     * @param userEmail email de l’utilisateur
+     * @return liste des achats au format DTO
+     */
     @Override
     public List<PurchaseDTO> getPurchasesByUser(String userEmail) {
         User user = userRepository.findByEmail(userEmail)
