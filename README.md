@@ -159,8 +159,7 @@ Le système recommande des jeux à partir de l’historique d’achat de l’uti
 ## Auteurs
 
 * Projet développé dans le cadre d’un cas d’étude académique.
-* Réalisé par **Alamine Jaasee** – Master 2 Ingénierie Logicielle.
-* Encadré par : *\[Nom du tuteur]*
+* Réalisé par **Mamadou Lamine DIASSY** – Master Expert en Ingénierie Logicielle.
 
 ---
 
