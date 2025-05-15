@@ -35,4 +35,16 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public Game(Long id, String name, String description, Double price,
+                Category category, Author author, Publisher publisher) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.author = author;
+        this.publisher = publisher;
+    }
+
 }

@@ -24,7 +24,7 @@ public class JwtService {
     private final JwtEncoder jwtEncoder;
 
     @Value("${jwt.expiration-in-days}")
-    int expirationInDays;
+    public int expirationInDays;
 
     public JwtService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;

@@ -7,7 +7,7 @@ public record GameCreateDTO(
         String name,
         String description,
         double price,
-        int stock,
+        Integer stock,
         Long categoryId,
         Long authorId,
         Long publisherId

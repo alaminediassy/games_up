@@ -35,7 +35,7 @@ public class SecurityConfig {
 
     // Clé secrète utilisée pour signer et valider les tokens JWT
     @Value("${jwt.secret-key}")
-    String key;
+    public String key;
 
     // Constantes représentant les rôles utilisateurs utilisés dans le système de sécurité
     private static final String ADMIN = "SCOPE_ROLE_ADMIN";
