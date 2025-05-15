@@ -151,8 +151,8 @@ Le système recommande des jeux à partir de l’historique d’achat de l’uti
 
 ## Lien vers les dépôts
 
-* 🎯 Backend Java : [github.com/alaminediassy/games\_up](https://github.com/alaminediassy/games_up)
-* 🤖 Microservice FastAPI : [github.com/alaminediassy/games\_up\_python\_fastapi](https://github.com/alaminediassy/games_up_python_fastapi)
+* Backend Java : [github.com/alaminediassy/games\_up](https://github.com/alaminediassy/games_up)
+* Microservice FastAPI : [github.com/alaminediassy/games\_up\_python\_fastapi](https://github.com/alaminediassy/games_up_python_fastapi)
 
 ---
 
